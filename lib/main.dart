@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
     return new MaterialApp(
         home: Scaffold(
       resizeToAvoidBottomPadding: false,
-      backgroundColor: Color.fromRGBO(140, 158, 126, 5),
+      backgroundColor: Color.fromRGBO(140, 158, 126, 4),
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: [
