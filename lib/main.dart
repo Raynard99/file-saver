@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromRGBO(140, 158, 126, 5),
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
