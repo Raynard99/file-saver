@@ -58,6 +58,14 @@ class _HomePageState extends State<HomePage> {
             "Netsystem",
             style: TextStyle(fontSize: 25, fontFamily: "Helvetica"),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
           backgroundColor: Color.fromRGBO(133, 151, 120, 5),
         ),
         body: SingleChildScrollView(
