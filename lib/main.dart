@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
               width: double.infinity,
               child: Icon(
                 Icons.person,
-                color: Color.fromRGBO(73, 82, 66, 4),
+                color: Color.fromRGBO(73, 82, 66, 5),
                 size: 37,
               ),
               padding: EdgeInsets.fromLTRB(0, 105, 0, 0),
