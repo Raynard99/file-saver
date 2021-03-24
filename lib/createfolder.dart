@@ -17,7 +17,7 @@ class CreateFolder extends StatelessWidget {
                   color: Color.fromRGBO(100, 127, 92, 5),
                 )),
             content: TextField(
-              // decoration: InputDecoration(hintText: "Folder Name"),
+              decoration: InputDecoration(hintText: "Folder Name"),
               controller: customController,
             ),
             actions: [

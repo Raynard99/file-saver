@@ -2,7 +2,10 @@ import 'package:first_app/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new LoginPage());
+  runApp(MaterialApp(
+    title: "App",
+    home: LoginPage(),
+  ));
 }
 
 // class MyApp extends StatelessWidget {
@@ -22,8 +25,7 @@ void main() {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: Scaffold(
+    return new Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Color.fromRGBO(140, 158, 126, 5),
       body: Column(
@@ -114,6 +116,6 @@ class LoginPage extends StatelessWidget {
           )
         ],
       ),
-    ));
+    );
   }
 }
