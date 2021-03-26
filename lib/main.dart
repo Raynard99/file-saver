@@ -8,26 +8,12 @@ void main() {
   ));
 }
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return new MaterialApp(
-//       home: new LoginPage(),
-//     );
-//   }
-// }
-
-// class LoginPage extends StatefulWidget {
-//   @override
-//   _LoginPage createState() => new _LoginPage();
-// }
-
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromRGBO(140, 158, 126, 5),
+      backgroundColor: Colors.white,
       body: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -48,7 +34,7 @@ class LoginPage extends StatelessWidget {
                 "Hello",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: Color.fromRGBO(73, 82, 66, 5),
                   fontSize: 60,
                   fontWeight: FontWeight.bold,
                 ),
@@ -65,7 +51,7 @@ class LoginPage extends StatelessWidget {
                     borderSide: BorderSide(
                         color: Color.fromRGBO(73, 82, 66, 5), width: 3)),
                 hintText: "USERNAME",
-                hintStyle: TextStyle(color: Colors.white38),
+                hintStyle: TextStyle(color: Color.fromRGBO(73, 82, 66, 5)),
                 // filled: true,
                 // fillColor: Colors.white54,
                 focusedBorder: OutlineInputBorder(
@@ -81,7 +67,7 @@ class LoginPage extends StatelessWidget {
                     borderSide: BorderSide(
                         color: Color.fromRGBO(73, 82, 66, 5), width: 3)),
                 hintText: "PASSWORD",
-                hintStyle: TextStyle(color: Colors.white38),
+                hintStyle: TextStyle(color: Color.fromRGBO(73, 82, 66, 5)),
                 // filled: true,
                 // fillColor: Colors.white54,
                 focusedBorder: OutlineInputBorder(
@@ -104,7 +90,7 @@ class LoginPage extends StatelessWidget {
               child: Text(
                 "LOGIN",
                 style: TextStyle(
-                    color: Colors.white70,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 15),
               ),
