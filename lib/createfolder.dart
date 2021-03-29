@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 
+//Dialog box to create folders
 class CreateFolder extends StatelessWidget {
   final Function create;
-  final Function createPage;
 
-  CreateFolder(this.create, this.createPage);
+  CreateFolder(this.create);
 
+  //create a pop up dialog
+  //Future expects input
   Future<String> createAlertDialog(BuildContext context) {
     TextEditingController customController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
+            //Dialog Box Title
             title: Text("Create Folder",
                 style: TextStyle(
                   color: Color.fromRGBO(100, 127, 92, 5),
                 )),
+            //Text field to take input from user
             content: TextField(
               decoration: InputDecoration(hintText: "Folder Name"),
               controller: customController,
             ),
             actions: [
               MaterialButton(
+                //Create File Icon
                 child: Row(children: [
                   Icon(
                     Icons.create_new_folder,
                     color: Color.fromRGBO(100, 127, 92, 5),
                     size: 30,
                   ),
+                  //Create Text
                   Padding(
                     padding: EdgeInsets.fromLTRB(3, 0, 0, 0),
                     child: Text(
@@ -57,7 +63,6 @@ class CreateFolder extends StatelessWidget {
         createAlertDialog(context).then((value) {
           print("foldername : $value");
           if (value != null) {
-            createPage(value);
             create(value);
           }
         });

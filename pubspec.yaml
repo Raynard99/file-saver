@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   flutter_slidable: ^0.5.7
+  file_picker: ^2.1.7
   flutter:
     sdk: flutter
 
