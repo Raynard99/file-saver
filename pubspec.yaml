@@ -17,11 +17,15 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
+module:
+  androidX: true
+
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter_slidable: ^0.5.7
+  file_picker: ^3.0.1
   flutter:
     sdk: flutter
 
