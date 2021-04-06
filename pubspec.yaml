@@ -26,6 +26,8 @@ environment:
 dependencies:
   flutter_slidable: ^0.5.7
   file_picker: ^3.0.1
+  flutter_pdfview: ^1.0.4
+  # flutter_plugin_pdf_viewer: ^1.0.7
   flutter:
     sdk: flutter
 

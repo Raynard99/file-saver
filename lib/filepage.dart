@@ -1,6 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import './pdfviewer.dart';
 
 //this page contains pdf files
 class FilePage extends StatefulWidget {
@@ -17,17 +19,17 @@ class _FilePageState extends State<FilePage> {
   String titlePage;
   _FilePageState(this.titlePage);
 
-  String _fileName;
+  // String _fileName;
   List<PlatformFile> _paths = [];
-  String _directoryPath;
   List<String> pdf = ["pdf"];
-  bool _loadingPath = false;
+  // bool _loadingPath = false;
   // TextEditingController _controller = TextEditingController(text: 'pdf');
 
   void _openFileExplorer() async {
-    setState(() => _loadingPath = true);
+    setState(() {}
+        // => _loadingPath = true
+        );
     try {
-      _directoryPath = null;
       _paths = (await FilePicker.platform.pickFiles(
               type: FileType.custom,
               allowMultiple: true,
@@ -40,8 +42,8 @@ class _FilePageState extends State<FilePage> {
     }
     if (!mounted) return;
     setState(() {
-      _loadingPath = false;
-      _fileName = _paths != null ? _paths.map((e) => e.name).toString() : '...';
+      // _loadingPath = false;
+      // _fileName = _paths != null ? _paths.map((e) => e.name).toString() : '...';
     });
   }
 
@@ -55,6 +57,12 @@ class _FilePageState extends State<FilePage> {
               : 'Failed to clean temporary files')),
         ),
       );
+    });
+  }
+
+  void delete(PlatformFile data) {
+    setState(() {
+      _paths.remove(data);
     });
   }
 
@@ -74,70 +82,85 @@ class _FilePageState extends State<FilePage> {
             style: TextStyle(fontSize: 25, fontFamily: "Helvetica"),
           ),
           backgroundColor: Color.fromRGBO(133, 151, 120, 5)),
-      body: Center(
-        child: Column(children: [
-          new Builder(
-            builder: (BuildContext context) => _loadingPath
-                ? Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    child: const CircularProgressIndicator())
-                : _paths != null
-                    ? new Container(
-                        padding: const EdgeInsets.only(bottom: 30.0),
-                        height: MediaQuery.of(context).size.height * 0.50,
-                        child: new Scrollbar(
-                            child: new ListView.separated(
-                          itemCount: _paths != null && _paths.isNotEmpty
-                              ? _paths.length
-                              : 1,
-                          itemBuilder: (BuildContext context, int index) {
-                            final bool isMultiPath =
-                                _paths != null && _paths.isNotEmpty;
-                            final String name = (isMultiPath
-                                ? _paths.toList()[index].name
-                                : _fileName ?? '...');
-                            return new ListTile(
-                              title: new Text(
-                                name,
+      body: _paths.length == 0
+          ? Text("")
+          : ListView.builder(
+              itemCount: _paths.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: GestureDetector(
+                      onTap: () {
+                        PlatformFile passData = _paths[index];
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ViewPdf(passData),
+                                settings: RouteSettings()));
+                      },
+                      child: Stack(
+                        children: [
+                          Slidable(
+                            child: Center(
+                              child: Container(
+                                height: 100,
+                                child: Card(
+                                  margin: EdgeInsets.all(10),
+                                  elevation: 7.0,
+                                  child: Center(
+                                    child: Text(_paths[index].name),
+                                  ),
+                                ),
                               ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) =>
-                              new Divider(),
-                        )),
-                      )
-                    : new Container(),
-          ),
-          // RaisedButton(
-          //   color: Color.fromRGBO(100, 127, 92, 5),
-          //   child: Text(
-          //     "Back",
-          //     style: TextStyle(color: Colors.white),
-          //   ),
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          // ),
-          ElevatedButton(
-              onPressed: () {
-                print(_paths[0].name);
+                            ),
+                            actionPane: SlidableDrawerActionPane(),
+                            actionExtentRatio: 0.5,
+                            controller: SlidableController(),
+                            secondaryActions: [
+                              IconSlideAction(
+                                caption: 'Delete',
+                                color: Colors.redAccent,
+                                icon: Icons.delete_sharp,
+                                onTap: () {
+                                  delete(_paths[index]);
+                                },
+                                closeOnTap: true,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ));
               },
-              child: Text("print data"))
-        ]),
-      ),
-      //upload file button
-      floatingActionButton: Container(
-        height: 70,
-        width: 70,
-        child: FittedBox(
-            child: FloatingActionButton(
-          child: Icon(Icons.file_upload),
-          onPressed: () => _openFileExplorer(),
-          backgroundColor: Color.fromRGBO(100, 127, 92, 5),
-        )),
-      ),
-      //upload file button alignment
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            // clear cache file button
+            Container(
+                // height: 70,
+                // width: 70,
+                child: FittedBox(
+                    child: FloatingActionButton(
+                        backgroundColor: Color.fromRGBO(100, 127, 92, 5),
+                        onPressed: () => _clearCachedFiles(),
+                        child: Icon(Icons.cleaning_services)))),
+            // upload file button
+            Container(
+                height: 70,
+                width: 70,
+                child: FittedBox(
+                    child: FloatingActionButton(
+                  backgroundColor: Color.fromRGBO(100, 127, 92, 5),
+                  onPressed: () => _openFileExplorer(),
+                  child: Icon(Icons.file_upload),
+                ))),
+          ],
+        ),
+      ),
     );
   }
 }
