@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import './pdfviewer.dart';
+import 'pdfviewer.dart';
 
 //this page contains pdf files
 class FilePage extends StatefulWidget {

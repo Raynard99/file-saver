@@ -1,13 +1,17 @@
+import 'package:first_app/yearpage.dart';
 import 'package:flutter/material.dart';
-import './filepage.dart';
+import 'monthpage.dart';
+import 'filepage.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 //Folder (Item)
 class Folder extends StatelessWidget {
   String title;
+  YearPage yearpage;
+  MonthPage monthpage;
   FilePage page;
   final Function delete;
-  Folder(this.title, this.page, this.delete);
+  Folder(this.title, this.delete, {this.yearpage, this.monthpage, this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +42,16 @@ class Folder extends StatelessWidget {
                   ))
             ]),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => page));
+              if (yearpage != null) {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => yearpage));
+              } else if (monthpage != null) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => monthpage));
+              } else {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => page));
+              }
             },
             onLongPress: () {},
           )),
